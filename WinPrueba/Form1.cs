@@ -32,6 +32,8 @@ namespace WinPrueba
 
             MessageBox.Show("ok");
             Cursor.Current = null;
+
+            /*c*/
         }
     }
 }
