@@ -11,6 +11,8 @@ namespace Capa_Envio
 {
     public class Basico
     {
+        #region
+        #endregion
         private static string conexion
         {
             get { return "Server=10.10.10.208;Database=BdWSBata;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
