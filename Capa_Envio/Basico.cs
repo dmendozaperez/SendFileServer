@@ -219,7 +219,8 @@ namespace Capa_Envio
                             if (!Directory.Exists(@_ruta_local_tx)) Directory.CreateDirectory(@_ruta_local_tx);
                             if (!Directory.Exists(@_ruta_local_wx)) Directory.CreateDirectory(@_ruta_local_wx);
                         }
-
+                        if (!Directory.Exists(@_ruta_local_tx)) Directory.CreateDirectory(@_ruta_local_tx);
+                        if (!Directory.Exists(@_ruta_local_wx)) Directory.CreateDirectory(@_ruta_local_wx);
                         /*ESTE PASO COPIAMOS LOS ARCHIV0S CEN DEL TX SERVER  DESTINO LOCAL TX*/
                         string _path_remoto_server_tx = _carpeta_remoto[i].ToString() + "\\TX";
                         /*VERIFICAMOS SI EL ARCHIVO EXISTE*/
