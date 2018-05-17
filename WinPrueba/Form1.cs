@@ -35,5 +35,11 @@ namespace WinPrueba
 
             /*c*/
         }
+
+        private void btnuploadf_Click(object sender, EventArgs e)
+        {
+            string _error = "";
+            Capa_Envio.Basico.ejecuta_proceso_foto(ref _error);
+        }
     }
 }

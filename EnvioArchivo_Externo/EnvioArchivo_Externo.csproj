@@ -37,6 +37,8 @@
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +54,11 @@
     <Compile Include="Install_UpdateFile.Designer.cs">
       <DependentUpon>Install_UpdateFile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Service References\BataUpload\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service_UpdateFie.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -63,6 +70,46 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Service References\BataUpload\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_File.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_File_Ruta.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_Fvdespc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_MsgTransac.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_PathDBF.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_Scdddes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.HelloWorldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_download_fileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_errores_transactionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_get_file_pathResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_get_file_uploadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_get_location_dbfResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_update_transaction_guiasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Capa_Envio\Capa_Envio.csproj">
@@ -74,6 +121,27 @@
     <EmbeddedResource Include="Install_UpdateFile.resx">
       <DependentUpon>Install_UpdateFile.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BataUpload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\Bata_Transaction.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

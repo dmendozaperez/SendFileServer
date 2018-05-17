@@ -362,5 +362,85 @@ namespace Capa_Envio
         #endregion
         #endregion
 
+        #region<ENVIO DE FOTOS AL SERVER POS POR WS>
+
+        public static void  ejecuta_proceso_foto(ref string _error)
+        {
+            BataUpload.ValidateAcceso ws_header_user = null;
+            BataUpload.Bata_TransactionSoapClient ws_get_metodo_ws = null;
+            try
+            {
+                /*credenciales para acceso de la ws pos*/
+                ws_header_user = new BataUpload.ValidateAcceso();
+                ws_header_user.Username = "3D4F4673-98EB-4EB5-A468-4B7FAEC0C721";
+                ws_header_user.Password = "566FDFF1-5311-4FE2-B3FC-0346923FE4B4";
+                /**/
+                /*instancia de la web services*/
+                ws_get_metodo_ws = new BataUpload.Bata_TransactionSoapClient();
+
+                /*captura la ruta desde(origen) de los archivos que se van copiar*/
+                BataUpload.Ent_File_Ruta ws_ruta_origen = ws_get_metodo_ws.ws_get_file_path(ws_header_user, "01");/*este codigo 01 es cuando se van a cargar las fotos*/
+                
+                /*validando que no me devuelva vacio*/
+                if (ws_ruta_origen != null)
+                {
+                    /*capturamos la ruta de origen*/
+                    string ruta_origen_fotos = ws_ruta_origen.file_origen;
+                    NetworkShare.ConnectToShare(@ruta_origen_fotos, "interfa", "interfa");
+                    if (Directory.Exists(@ruta_origen_fotos))
+                    {
+                        string[] _fotos_path = Directory.GetFiles(@ruta_origen_fotos, "*.jpg");/*filtramos solo las fotos jpg ruta especifica*/
+                        var fotos_nom = _fotos_path.Select(Path.GetFileName).ToArray();/*capturamos solo el nombre del archivo foto*/
+
+                        /*como capturamos todos los nombre de los archivos necesitams enviar a la lista de la web service*/
+                        List<BataUpload.Ent_File> result_files_nom= (from element in fotos_nom
+                                                                     select new BataUpload.Ent_File
+                                                                     {
+                                                                         file_name = element,
+                                                                     }).ToList();
+
+                        var array = new BataUpload.Ent_Lista_File();
+                        array.lista_file_name = result_files_nom.ToArray();/*convertimos array para la variable de ws*/
+                        /*la web serivce solo me a traer los archivos que no estan en la base server*/
+                        var get_file_nexiste = ws_get_metodo_ws.ws_get_file_upload(ws_header_user,"01",array);
+
+                        if (get_file_nexiste!=null)
+                        {
+                            foreach(var item_name_ws in get_file_nexiste)
+                            {
+                                /*solo en este caso vamos a filtrar el array */
+                                var file_rut = _fotos_path.Where(f => f.Contains(item_name_ws.file_name.ToString())).ToList();
+
+                                /*verificamos que no este null*/
+                                if (file_rut != null)
+                                {
+                                    if (file_rut.Count > 0)
+                                    {
+                                        string ruta_file_local = file_rut[0].ToString();
+                                        byte[] file_bytes_local = File.ReadAllBytes(@ruta_file_local);
+                                        string nom_file_local = Path.GetFileName(@ruta_file_local);
+
+                                        ws_get_metodo_ws.ws_download_file(ws_header_user, file_bytes_local, nom_file_local, "01");
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                _error=exc.Message;
+            }
+
+        }
+
+      
+
+        #endregion
+
     }
 }
