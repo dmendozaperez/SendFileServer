@@ -36,7 +36,7 @@ namespace EnvioArchivo_Externo
             tmservicio_update.Elapsed += new ElapsedEventHandler(tmservicio_update_Elapsed);
 
             /*envio de fotos*/
-            tmservicio_fotos = new Timer(1000);
+            tmservicio_fotos = new Timer(7200000); //1 sec = 1000, 30 mins = 1800000
             tmservicio_fotos.Elapsed += new ElapsedEventHandler(tmservicio_fotos_Elapsed);
 
         }
