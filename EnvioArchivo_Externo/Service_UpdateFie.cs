@@ -79,7 +79,7 @@ namespace EnvioArchivo_Externo
                     _valor = 1;
                     _valida_service_update = 1;
                     string _error = "";
-                    Basico._ejecutar_proceso(ref _error);
+                    Basico._ejecutar_proceso_ws(ref _error);
                     _valida_service_update = 0;
                 }
                 //****************************************************************************

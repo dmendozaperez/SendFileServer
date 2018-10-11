@@ -24,11 +24,11 @@ namespace WinPrueba
             Cursor.Current = Cursors.WaitCursor;
             string _error = "";
             //Capa_Envio.Basico._envia_xml(ref _error);
-            Capa_Envio.Basico._ejecutar_proceso(ref _error);
+            Capa_Envio.Basico._ejecutar_proceso_ws(ref _error);
 
-            TextWriter tw = new StreamWriter(varchivov, true);
-            tw.WriteLine(DateTime.Now.ToString() + _error);
-            tw.Close();
+            //TextWriter tw = new StreamWriter(varchivov, true);
+            //tw.WriteLine(DateTime.Now.ToString() + _error);
+            //tw.Close();
 
             MessageBox.Show("ok");
             Cursor.Current = null;

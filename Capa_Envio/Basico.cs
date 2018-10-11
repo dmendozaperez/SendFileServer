@@ -15,11 +15,11 @@ namespace Capa_Envio
         #endregion
         private static string conexion
         {
-            get { return "Server=10.10.10.208;Database=BdWSBata;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            get { return "Server=posperu.bgr.pe;Database=BdWSBata;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
         private static string conexion_remoto
         {
-            get { return "Server=10.10.10.208;Database=BdWebService;User ID=sa;Password=Bata2013;Trusted_Connection=False;"; }
+            get { return "Server=posperu.bgr.pe;Database=BdWebService;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
         #region<REGION DE ENVIO XML AL SERVIDOR>
         private static DataSet _retorna_tabla_ruta(ref string _error)
@@ -257,6 +257,110 @@ namespace Capa_Envio
                 _error = exc.Message;
             }
         }
+
+        public static void _ejecutar_proceso_ws(ref string _error)
+        {
+            DataSet dsprincipal = null;
+            DataTable dtruta = null;
+            DataTable dtwx = null;
+            DataTable dttx = null;
+            try
+            {
+                dsprincipal = _retorna_tabla_ruta_remoto(ref _error);
+                if (dsprincipal.Tables.Count > 0)
+                {
+                    dtruta = dsprincipal.Tables[0];
+                    dtwx = dsprincipal.Tables[1];
+                    dttx = dsprincipal.Tables[2];
+
+                    string _ruta_server_remoto = dtruta.Rows[0]["ruta_server_remoto"].ToString();
+                    string _ruta_serer_local = dtruta.Rows[0]["ruta_server"].ToString();
+
+                    NetworkShare.ConnectToShare(@_ruta_server_remoto, "interfa", "interfa");
+
+                    _ejecutar_proceso_wx_ws(ref _error);
+
+                    string[] _carpeta_remoto = Directory.GetDirectories(@_ruta_server_remoto);
+
+               
+
+                    for (Int32 i = 0; i < _carpeta_remoto.Length; ++i)
+                    {
+                        //string lastFolderName = System.IO.Path.GetDirectoryName(_carpeta_remoto[i].ToString());
+
+                        var dir_server = new DirectoryInfo(_carpeta_remoto[i].ToString()).Name;
+                        //var dirName = dir.Name;
+                        Boolean _existe_folder = false; //existe_folder_local(_carpeta_local, dir_server);
+                        string _ruta_local = _ruta_serer_local + "\\" + dir_server.ToString();
+                        string _ruta_local_tx = _ruta_local + "\\TX";
+                        string _ruta_local_wx = _ruta_local + "\\WX";
+                      
+                        /*ESTE PASO COPIAMOS LOS ARCHIV0S CEN DEL TX SERVER  DESTINO LOCAL TX*/
+                        string _path_remoto_server_tx = _carpeta_remoto[i].ToString() + "\\TX";
+                        /*VERIFICAMOS SI EL ARCHIVO EXISTE*/
+                        if (Directory.Exists(@_path_remoto_server_tx))
+                        {
+                            /*ahora vamos a extraer los archivos CEN*/
+                            string[] _CEN = Directory.GetFiles(@_path_remoto_server_tx, "*.CEN");
+
+                            if (_CEN.Length > 0)
+                            {
+                                for (Int32 a = 0; a < _CEN.Length; ++a)
+                                {
+                                    string _archivo = _CEN[a].ToString();
+                                    string _nombrearchivo_cen = Path.GetFileNameWithoutExtension(@_archivo);
+                                    byte[] _archivo_bytes = File.ReadAllBytes(@_archivo);
+
+                                    Boolean _copia_tx = copiar_file_wx_tx(_archivo_bytes, @_ruta_local_tx, _nombrearchivo_cen, ref _error);
+
+                                    if (_copia_tx)
+                                    {
+                                        File.Delete(@_archivo);
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception exc)
+            {
+                _error = exc.Message;
+            }
+        }
+
+        private static Boolean copiar_file_wx_tx(byte[] _archivo_xml, string _destino_path, string _name_archivo, ref string _error)
+        {
+            BataWS.Autenticacion conexion = null;
+            BataWS.bata_transaccionSoapClient trans = null;
+            Boolean _valida = false;
+            try
+            {
+                string _archivo_ruta = _destino_path + "\\" + _name_archivo + ".cen";
+
+               // File.WriteAllBytes(@_archivo_ruta, _archivo_xml);
+
+                conexion = new BataWS.Autenticacion();
+                conexion.user_name = "emcomer";
+                conexion.user_password = "Bata2013";
+                trans = new BataWS.bata_transaccionSoapClient();
+
+                _valida = trans.ws_send_filepaq_ws_tx(conexion,_archivo_xml,_destino_path,_name_archivo);
+
+                
+            }
+            catch (Exception exc)
+            {
+                _error = exc.Message;
+                _valida = false;
+            }
+            return _valida;
+        }
+
         private static Boolean copiar_fie_tx(byte[] _archivo_xml, string _destino_path, string _name_archivo,ref string _error)
         {
             Boolean _valida = false;
@@ -302,6 +406,51 @@ namespace Capa_Envio
         #endregion
         #region<REGION DE UPDATE ARCHIVOS WX ENVIA AL REMOTO>
 
+        private static void _ejecutar_proceso_wx_ws(ref string _error)
+        {
+            BataWS.Autenticacion conexion = null;
+            BataWS.bata_transaccionSoapClient trans = null;
+            try
+            {
+                conexion = new BataWS.Autenticacion();
+                conexion.user_name = "emcomer";
+                conexion.user_password = "Bata2013";
+                trans = new BataWS.bata_transaccionSoapClient();
+
+                var files = trans.ws_get_filepaq_ws_bytes(conexion);
+
+                if (files!=null)
+                {
+                    if (files.Count() > 0)
+                    {
+                        foreach (var item in files)
+                        {
+                            if (enviar_paquete_wx(item.file_destino,item.file_bytes))
+                                trans.ws_delete_paq_ws(conexion, item.files_origen);
+                        }
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error = exc.Message;
+            }
+        }
+        private static Boolean enviar_paquete_wx(string file_destino,Byte[] file_bytes)
+        {
+            Boolean valida = false;
+            try
+            {
+                File.WriteAllBytes(@file_destino, file_bytes);
+                valida = true;
+            }
+            catch 
+            {
+                valida = false;
+            }
+            return valida;
+        }
         private static void _ejecutar_proceso_wx(string _ruta_local, string _ruta_remoto, ref string _error)
         {
             try
