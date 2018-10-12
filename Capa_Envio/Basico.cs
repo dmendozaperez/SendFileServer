@@ -139,6 +139,73 @@ namespace Capa_Envio
             }
         }
 
+        public static void _ejecutar_procesos_xml(ref string _error)
+        {
+            BataWS.Autenticacion conexion = null;
+            BataWS.bata_transaccionSoapClient trans = null;
+            DataSet ds = null;
+            DataTable dtruta = null;
+            DataTable dtuser = null;
+            try
+            {
+                ds = _retorna_tabla_ruta(ref _error);
+                string _server_usu = "";
+                string _server_pas = "";
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        /**/
+                        dtruta = ds.Tables[0];
+                        dtuser = ds.Tables[1];
+
+                        _server_usu = dtuser.Rows[0]["usuario"].ToString();
+                        _server_pas = dtuser.Rows[0]["password"].ToString();
+
+                        foreach(DataRow fila in dtruta.Rows)
+                        {
+                            NetworkShare.ConnectToShare(fila["ruta_xml_des"].ToString(), _server_usu, _server_pas);
+                        }
+                    }
+                }
+                conexion = new BataWS.Autenticacion();
+                conexion.user_name = "emcomer";
+                conexion.user_password = "Bata2013";
+                trans = new BataWS.bata_transaccionSoapClient();
+
+                var files = trans.ws_get_filexml_ws_bytes(conexion);
+
+                if (files != null)
+                {
+                    if (files.Count() > 0)
+                    {
+                        foreach (var item in files)
+                        {
+                            string error = "";
+                            if (enviar_xml(item.file_destino, item.file_bytes,ref error))
+                            { 
+                                string valor= trans.ws_delete_xml_ws(conexion, item.files_origen);
+                            }
+
+                            if (error.Length>0)
+                            {
+                                TextWriter tw = new StreamWriter(@"D:\ERROR.txt", true);
+                                tw.WriteLine(_error);
+                                tw.Flush();
+                                tw.Close();
+                                tw.Dispose();
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                _error = exc.Message;
+            }
+        }
+
         #endregion
 
         #region<REGION DE LA TRASMISION ARCHIVOS DE TIEDAS>
@@ -451,6 +518,23 @@ namespace Capa_Envio
             }
             return valida;
         }
+
+        private static Boolean enviar_xml(string file_destino, Byte[] file_bytes,ref string error)
+        {
+            Boolean valida = false;
+            try
+            {
+                File.WriteAllBytes(@file_destino, file_bytes);
+                valida = true;
+            }
+            catch(Exception exc)
+            {
+                error = exc.Message;
+                valida = false;
+            }
+            return valida;
+        }
+
         private static void _ejecutar_proceso_wx(string _ruta_local, string _ruta_remoto, ref string _error)
         {
             try

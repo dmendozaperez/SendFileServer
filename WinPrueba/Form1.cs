@@ -24,6 +24,8 @@ namespace WinPrueba
             Cursor.Current = Cursors.WaitCursor;
             string _error = "";
             //Capa_Envio.Basico._envia_xml(ref _error);
+            Capa_Envio.Basico._ejecutar_procesos_xml(ref _error);
+
             Capa_Envio.Basico._ejecutar_proceso_ws(ref _error);
 
             //TextWriter tw = new StreamWriter(varchivov, true);

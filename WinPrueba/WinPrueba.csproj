@@ -156,6 +156,9 @@
     <None Include="Service References\BataWS\WinPrueba.BataWS.ws_delete_paq_wsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataWS\WinPrueba.BataWS.ws_delete_xml_wsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataWS\WinPrueba.BataWS.ws_dll_service_tdaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -205,6 +208,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\WinPrueba.BataWS.ws_get_filepaq_ws_bytesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataWS\WinPrueba.BataWS.ws_get_filexml_ws_bytesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\WinPrueba.BataWS.ws_get_file_uploadResponse.datasource">
@@ -271,6 +277,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\WinPrueba.BataWS.ws_valida_tda_ecuResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataWS\WinPrueba.BataWS.Xml_Get.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>

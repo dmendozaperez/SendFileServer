@@ -781,6 +781,42 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ws_delete_xml_ws">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ruta_delete" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_delete_xml_wsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_delete_xml_wsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ws_get_filexml_ws_bytes">
+        <s:complexType />
+      </s:element>
+      <s:element name="ws_get_filexml_ws_bytesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ws_get_filexml_ws_bytesResult" type="tns:ArrayOfXml_Get" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfXml_Get">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Xml_Get" nillable="true" type="tns:Xml_Get" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Xml_Get">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="files_origen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="file_destino" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="file_bytes" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ws_send_filepaq_ws_tx">
         <s:complexType>
           <s:sequence>
@@ -1212,6 +1248,24 @@
   <wsdl:message name="ws_exists_guia_tienda_almAutenticacion">
     <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
   </wsdl:message>
+  <wsdl:message name="ws_delete_xml_wsSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_delete_xml_ws" />
+  </wsdl:message>
+  <wsdl:message name="ws_delete_xml_wsSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_delete_xml_wsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_delete_xml_wsAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_filexml_ws_bytesSoapIn">
+    <wsdl:part name="parameters" element="tns:ws_get_filexml_ws_bytes" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_filexml_ws_bytesSoapOut">
+    <wsdl:part name="parameters" element="tns:ws_get_filexml_ws_bytesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ws_get_filexml_ws_bytesAutenticacion">
+    <wsdl:part name="Autenticacion" element="tns:Autenticacion" />
+  </wsdl:message>
   <wsdl:message name="ws_send_filepaq_ws_txSoapIn">
     <wsdl:part name="parameters" element="tns:ws_send_filepaq_ws_tx" />
   </wsdl:message>
@@ -1411,6 +1465,14 @@
     <wsdl:operation name="ws_exists_guia_tienda_alm">
       <wsdl:input message="tns:ws_exists_guia_tienda_almSoapIn" />
       <wsdl:output message="tns:ws_exists_guia_tienda_almSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_delete_xml_ws">
+      <wsdl:input message="tns:ws_delete_xml_wsSoapIn" />
+      <wsdl:output message="tns:ws_delete_xml_wsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_filexml_ws_bytes">
+      <wsdl:input message="tns:ws_get_filexml_ws_bytesSoapIn" />
+      <wsdl:output message="tns:ws_get_filexml_ws_bytesSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ws_send_filepaq_ws_tx">
       <wsdl:input message="tns:ws_send_filepaq_ws_txSoapIn" />
@@ -1850,6 +1912,26 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:ws_exists_guia_tienda_almAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_delete_xml_ws">
+      <soap:operation soapAction="http://tempuri.org/ws_delete_xml_ws" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_delete_xml_wsAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_filexml_ws_bytes">
+      <soap:operation soapAction="http://tempuri.org/ws_get_filexml_ws_bytes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ws_get_filexml_ws_bytesAutenticacion" part="Autenticacion" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -2311,6 +2393,26 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ws_exists_guia_tienda_almAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_delete_xml_ws">
+      <soap12:operation soapAction="http://tempuri.org/ws_delete_xml_ws" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_delete_xml_wsAutenticacion" part="Autenticacion" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ws_get_filexml_ws_bytes">
+      <soap12:operation soapAction="http://tempuri.org/ws_get_filexml_ws_bytes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ws_get_filexml_ws_bytesAutenticacion" part="Autenticacion" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

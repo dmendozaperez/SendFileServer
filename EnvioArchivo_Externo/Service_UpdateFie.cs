@@ -107,7 +107,7 @@ namespace EnvioArchivo_Externo
                     _valor = 1;
                     _valida_service_xml = 1;             
                     string _error = "";
-                    Basico._envia_xml(ref _error);                    
+                    Basico._ejecutar_procesos_xml(ref _error);                    
                     _valida_service_xml = 0;                    
                 }
                 //****************************************************************************

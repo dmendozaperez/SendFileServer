@@ -77,6 +77,9 @@
     <None Include="App.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Service References\BataUpload\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_Config_Service.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_File.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -101,6 +104,27 @@
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_download_fileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_Scactco_listResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_scdrembResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_stock_tdaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_venta_tdaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_venta_tda_listaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_venta_tda_listResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envio_traspaso_tdaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_errores_transactionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -113,7 +137,16 @@
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_get_location_dbfResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_get_time_servicetransResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_transmision_ingreso_nubeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_update_transaction_guiasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_valida_traspaso_tdaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\bata_transaccion.wsdl" />
@@ -142,6 +175,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.ws_delete_paq_wsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.ws_delete_xml_wsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.ws_dll_service_tdaResponse.datasource">
@@ -193,6 +229,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.ws_get_filepaq_ws_bytesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.ws_get_filexml_ws_bytesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.ws_get_file_uploadResponse.datasource">
@@ -261,6 +300,9 @@
     <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.ws_valida_tda_ecuResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataWS\EnvioArchivo_Externo.BataWS.Xml_Get.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Capa_Envio\Capa_Envio.csproj">
@@ -281,21 +323,6 @@
     <WCFMetadataStorage Include="Service References\BataWS\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BataUpload\Bata_Transaction.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BataUpload\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BataUpload\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BataUpload\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\BataWS\bata_transaccion.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +333,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BataWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\Bata_Transaction.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BataUpload\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

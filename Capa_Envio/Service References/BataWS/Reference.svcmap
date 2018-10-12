@@ -22,8 +22,8 @@
     <MetadataSource Address="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="bata_transaccion1.disco" MetadataType="Disco" ID="0410da2a-1496-4336-9868-3e9a67b8a3f4" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?disco" />
-    <MetadataFile FileName="bata_transaccion1.wsdl" MetadataType="Wsdl" ID="1f213f9a-f571-41ab-9847-60b878b20124" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?wsdl" />
+    <MetadataFile FileName="bata_transaccion1.disco" MetadataType="Disco" ID="14255747-0949-4731-b77b-05e4a54b4bb8" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?disco" />
+    <MetadataFile FileName="bata_transaccion1.wsdl" MetadataType="Wsdl" ID="3ab00f59-de22-462b-bd80-7162d9f2c6a3" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

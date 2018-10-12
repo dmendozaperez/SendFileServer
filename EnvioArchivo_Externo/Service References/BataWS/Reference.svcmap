@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6c02b099-2265-4b9c-901d-d1f0f4fa61eb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d65fbf3e-50c1-47e3-a217-4f5fcf826e58" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="bata_transaccion.disco" MetadataType="Disco" ID="53175a69-2901-4ec9-83f8-88a0b8ab3495" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?disco" />
-    <MetadataFile FileName="bata_transaccion.wsdl" MetadataType="Wsdl" ID="d2b68775-4ab8-4b05-a916-745d28ab701e" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?wsdl" />
+    <MetadataFile FileName="bata_transaccion.disco" MetadataType="Disco" ID="10abd461-a60d-4c3d-9467-b1fe5eae3721" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?disco" />
+    <MetadataFile FileName="bata_transaccion.wsdl" MetadataType="Wsdl" ID="24564926-fe7f-48a0-9140-899df42779ea" SourceId="1" SourceUrl="http://posperu.bgr.pe/web_site_tienda/bata_transaccion.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
