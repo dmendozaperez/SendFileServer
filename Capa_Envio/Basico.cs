@@ -15,11 +15,11 @@ namespace Capa_Envio
         #endregion
         private static string conexion
         {
-            get { return "Server=posperu.bgr.pe;Database=BdWSBata;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
+            get { return "Server=POSPERUBD.BGR.PE;Database=BdWSBata;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
         private static string conexion_remoto
         {
-            get { return "Server=posperu.bgr.pe;Database=BdWebService;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
+            get { return "Server=POSPERUBD.BGR.PE;Database=BdWebService;User ID=pos_oracle;Password=Bata2018**;Trusted_Connection=False;"; }
         }
         #region<REGION DE ENVIO XML AL SERVIDOR>
         private static DataSet _retorna_tabla_ruta(ref string _error)
