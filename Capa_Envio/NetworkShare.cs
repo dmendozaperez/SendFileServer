@@ -143,10 +143,19 @@ namespace Capa_Envio
 
         private static string GetError(int errNum)
         {
-            foreach (ErrorClass er in ERROR_LIST)
+            try
             {
-                if (er.num == errNum) return er.message;
+                foreach (ErrorClass er in ERROR_LIST)
+                {
+                    if (er.num == errNum) return er.message;
+                }
             }
+            catch 
+            {
+
+                
+            }
+            
             return "Error: Unknown, " + errNum;
         }
         #endregion

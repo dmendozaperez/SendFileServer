@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Capa_Envio;
+using System.IO;
+
 namespace EnvioArchivo_Externo
 {
     public partial class Service_UpdateFie : ServiceBase
@@ -43,6 +45,9 @@ namespace EnvioArchivo_Externo
         void tmservicio_fotos_Elapsed(object sender, ElapsedEventArgs e)
         {
             Int32 _valor = 0;
+            String _hora = "";
+            StreamWriter tw = null;
+            string log_upload = @"D:\BataTransaction\UPLOAD_FOTO.txt";
             try
             {
                 if (_valida_service_foto == 0)
@@ -53,12 +58,28 @@ namespace EnvioArchivo_Externo
                     string _error = "";
                     Basico.ejecuta_proceso_foto(ref _error);
                     _valida_service_foto = 0;
+
+                    if (_error.Length>0)
+                    { 
+                        _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> (servicio windows) " + _error;
+                        tw = new StreamWriter(log_upload, true);
+                        tw.WriteLine(_hora);
+                        tw.Flush();
+                        tw.Close();
+                        tw.Dispose();
+                    }
                 }
                 //****************************************************************************
             }
-            catch
+            catch(Exception exc)
             {
                 _valida_service_foto = 0;
+                _hora = DateTime.Today.ToString() + " " + DateTime.Now.ToLongTimeString() + "==> (servicio windows) " + exc.Message;
+                tw = new StreamWriter(log_upload, true);
+                tw.WriteLine(_hora);
+                tw.Flush();
+                tw.Close();
+                tw.Dispose();
             }
 
             if (_valor == 1)

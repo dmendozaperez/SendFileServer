@@ -24,7 +24,7 @@ namespace WinPrueba
             Cursor.Current = Cursors.WaitCursor;
             string _error = "";
             //Capa_Envio.Basico._envia_xml(ref _error);
-            Capa_Envio.Basico._ejecutar_procesos_xml(ref _error);
+            //Capa_Envio.Basico._ejecutar_procesos_xml(ref _error);
 
             Capa_Envio.Basico._ejecutar_proceso_ws(ref _error);
 
@@ -40,8 +40,11 @@ namespace WinPrueba
 
         private void btnuploadf_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             string _error = "";
             Capa_Envio.Basico.ejecuta_proceso_foto(ref _error);
+            MessageBox.Show("ok");
+            Cursor.Current = null;
         }
     }
 }

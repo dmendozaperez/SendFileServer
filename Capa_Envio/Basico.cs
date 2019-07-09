@@ -512,7 +512,7 @@ namespace Capa_Envio
                 File.WriteAllBytes(@file_destino, file_bytes);
                 valida = true;
             }
-            catch 
+            catch(Exception exc) 
             {
                 valida = false;
             }
@@ -623,14 +623,26 @@ namespace Capa_Envio
                     if (Directory.Exists(@ruta_origen_fotos))
                     {
                         string[] _fotos_path = Directory.GetFiles(@ruta_origen_fotos, "*.jpg");/*filtramos solo las fotos jpg ruta especifica*/
-                        var fotos_nom = _fotos_path.Select(Path.GetFileName).ToArray();/*capturamos solo el nombre del archivo foto*/
+                        //var fotos_nom = _fotos_path.Select(Path.GetFileName).ToArray();/*capturamos solo el nombre del archivo foto*/
 
                         /*como capturamos todos los nombre de los archivos necesitams enviar a la lista de la web service*/
-                        List<BataUpload.Ent_File> result_files_nom= (from element in fotos_nom
-                                                                     select new BataUpload.Ent_File
-                                                                     {
-                                                                         file_name = element,
-                                                                     }).ToList();
+                        //List<BataUpload.Ent_File> result_files_nom= (from element in fotos_nom
+                        //                                             select new BataUpload.Ent_File
+                        //                                             {
+                        //                                                 file_name = element,
+
+                        //                                             }).ToList();
+                        DirectoryInfo d1 = new DirectoryInfo(@ruta_origen_fotos);
+                        FileSystemInfo[] files = d1.GetFileSystemInfos();
+
+                        List<BataUpload.Ent_File> result_files_nom = (from element in files.Where(e=>e.Extension.ToUpper()== ".JPG")
+                                                                       select new BataUpload.Ent_File
+                                                                       {
+                                                                           file_name = element.Name,
+                                                                           file_creacion = element.CreationTime.ToString("dd/MM/yyyy hh:mm:ss"),
+                                                                           file_update = element.LastWriteTime.ToString("dd/MM/yyyy hh:mm:ss"),
+
+                                                                       }).ToList();
 
                         var array = new BataUpload.Ent_Lista_File();
                         array.lista_file_name = result_files_nom.ToArray();/*convertimos array para la variable de ws*/
@@ -653,7 +665,7 @@ namespace Capa_Envio
                                         byte[] file_bytes_local = File.ReadAllBytes(@ruta_file_local);
                                         string nom_file_local = Path.GetFileName(@ruta_file_local);
 
-                                        ws_get_metodo_ws.ws_download_file(ws_header_user, file_bytes_local, nom_file_local, "01");
+                                        string msg=ws_get_metodo_ws.ws_download_file(ws_header_user, file_bytes_local, nom_file_local, "01", item_name_ws.file_creacion,item_name_ws.file_update);
                                     }
                                 }
 

@@ -77,6 +77,12 @@
     <None Include="App.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Service References\BataUpload\Bata_Transaction.wsdl" />
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_Alma_Ecu.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_CarpetaUpload_Xstore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.Ent_Config_Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -110,6 +116,9 @@
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_scdrembResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_stock_almacenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_envia_stock_tdaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -138,6 +147,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_get_time_servicetransResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_get_xstore_carpeta_uploadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_lista_alma_EcuResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataUpload\EnvioArchivo_Externo.BataUpload.ws_transmision_ingreso_nubeResponse.datasource">
