@@ -46,5 +46,14 @@ namespace WinPrueba
             MessageBox.Show("ok");
             Cursor.Current = null;
         }
+
+        private void btncom_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            string _error = "";
+            Capa_Envio.Basico.ejecuta_proceso_comunicado(ref _error);
+            MessageBox.Show("ok");
+            Cursor.Current = null;
+        }
     }
 }

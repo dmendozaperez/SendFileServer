@@ -30,6 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.btnuploadf = new System.Windows.Forms.Button();
+            this.btncom = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -44,7 +45,7 @@
             // 
             // btnuploadf
             // 
-            this.btnuploadf.Location = new System.Drawing.Point(141, 188);
+            this.btnuploadf.Location = new System.Drawing.Point(153, 35);
             this.btnuploadf.Name = "btnuploadf";
             this.btnuploadf.Size = new System.Drawing.Size(75, 23);
             this.btnuploadf.TabIndex = 1;
@@ -52,11 +53,22 @@
             this.btnuploadf.UseVisualStyleBackColor = true;
             this.btnuploadf.Click += new System.EventHandler(this.btnuploadf_Click);
             // 
+            // btncom
+            // 
+            this.btncom.Location = new System.Drawing.Point(103, 186);
+            this.btncom.Name = "btncom";
+            this.btncom.Size = new System.Drawing.Size(75, 23);
+            this.btncom.TabIndex = 2;
+            this.btncom.Text = "comunicado";
+            this.btncom.UseVisualStyleBackColor = true;
+            this.btncom.Click += new System.EventHandler(this.btncom_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btncom);
             this.Controls.Add(this.btnuploadf);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -69,6 +81,7 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnuploadf;
+        private System.Windows.Forms.Button btncom;
     }
 }
 

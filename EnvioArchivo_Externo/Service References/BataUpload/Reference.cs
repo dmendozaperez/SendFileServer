@@ -108,6 +108,14 @@ namespace EnvioArchivo_Externo.BataUpload {
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_file_path", ReplyAction="*")]
         System.Threading.Tasks.Task<EnvioArchivo_Externo.BataUpload.ws_get_file_pathResponse> ws_get_file_pathAsync(EnvioArchivo_Externo.BataUpload.ws_get_file_pathRequest request);
         
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_download_file_comunicadoRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_download_file_comunicado", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoResponse ws_download_file_comunicado(EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_download_file_comunicado", ReplyAction="*")]
+        System.Threading.Tasks.Task<EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoResponse> ws_download_file_comunicadoAsync(EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest request);
+        
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_download_fileRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_download_file", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -252,6 +260,41 @@ namespace EnvioArchivo_Externo.BataUpload {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_consultar_tiendas_disponibles_cv", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> ws_consultar_tiendas_disponibles_cvAsync(string cod_tda);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_consultar_comprobantes", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ws_consultar_comprobantes(string cod_tda, string tipo, string serie, string numero, string cod_entid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_consultar_comprobantes", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ws_consultar_comprobantesAsync(string cod_tda, string tipo, string serie, string numero, string cod_entid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_FE", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        EnvioArchivo_Externo.BataUpload.Ent_Paperless_Return ws_get_FE(string ruc, string login, string password, string tipodoc, string folio, string tipoRetorno);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_get_FE", ReplyAction="*")]
+        System.Threading.Tasks.Task<EnvioArchivo_Externo.BataUpload.Ent_Paperless_Return> ws_get_FEAsync(string ruc, string login, string password, string tipodoc, string folio, string tipoRetorno);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_consultar_ganador_ruleta_bata", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ws_consultar_ganador_ruleta_bata(string cod_tda);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_consultar_ganador_ruleta_bata", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ws_consultar_ganador_ruleta_bataAsync(string cod_tda);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_actualizar_cupon_ruleta", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string[] ws_actualizar_cupon_ruleta(string cod_tda, string codigo, string estado, string doc_vta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_actualizar_cupon_ruleta", ReplyAction="*")]
+        System.Threading.Tasks.Task<string[]> ws_actualizar_cupon_ruletaAsync(string cod_tda, string codigo, string estado, string doc_vta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_validar_cupon_ruleta_bata", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ws_validar_cupon_ruleta_bata(string cod_tda, string codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://bataperu.com.pe/ws_validar_cupon_ruleta_bata", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ws_validar_cupon_ruleta_bataAsync(string cod_tda, string codigo);
     }
     
     /// <remarks/>
@@ -301,6 +344,52 @@ namespace EnvioArchivo_Externo.BataUpload {
             set {
                 this.anyAttrField = value;
                 this.RaisePropertyChanged("AnyAttr");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Paperless_Return : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string codigoField;
+        
+        private string respuestaField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string codigo {
+            get {
+                return this.codigoField;
+            }
+            set {
+                this.codigoField = value;
+                this.RaisePropertyChanged("codigo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string respuesta {
+            get {
+                return this.respuestaField;
+            }
+            set {
+                this.respuestaField = value;
+                this.RaisePropertyChanged("respuesta");
             }
         }
         
@@ -5377,6 +5466,53 @@ namespace EnvioArchivo_Externo.BataUpload {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_download_file_comunicado", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_download_file_comunicadoRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://bataperu.com.pe/")]
+        public EnvioArchivo_Externo.BataUpload.ValidateAcceso ValidateAcceso;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] file;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=1)]
+        public string file_name;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=2)]
+        public string ruta_server_comunicado;
+        
+        public ws_download_file_comunicadoRequest() {
+        }
+        
+        public ws_download_file_comunicadoRequest(EnvioArchivo_Externo.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado) {
+            this.ValidateAcceso = ValidateAcceso;
+            this.file = file;
+            this.file_name = file_name;
+            this.ruta_server_comunicado = ruta_server_comunicado;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_download_file_comunicadoResponse", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
+    public partial class ws_download_file_comunicadoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=0)]
+        public string ws_download_file_comunicadoResult;
+        
+        public ws_download_file_comunicadoResponse() {
+        }
+        
+        public ws_download_file_comunicadoResponse(string ws_download_file_comunicadoResult) {
+            this.ws_download_file_comunicadoResult = ws_download_file_comunicadoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ws_download_file", WrapperNamespace="http://bataperu.com.pe/", IsWrapped=true)]
     public partial class ws_download_fileRequest {
         
@@ -6136,6 +6272,35 @@ namespace EnvioArchivo_Externo.BataUpload {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoResponse EnvioArchivo_Externo.BataUpload.Bata_TransactionSoap.ws_download_file_comunicado(EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest request) {
+            return base.Channel.ws_download_file_comunicado(request);
+        }
+        
+        public string ws_download_file_comunicado(EnvioArchivo_Externo.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado) {
+            EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest inValue = new EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.file = file;
+            inValue.file_name = file_name;
+            inValue.ruta_server_comunicado = ruta_server_comunicado;
+            EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoResponse retVal = ((EnvioArchivo_Externo.BataUpload.Bata_TransactionSoap)(this)).ws_download_file_comunicado(inValue);
+            return retVal.ws_download_file_comunicadoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoResponse> EnvioArchivo_Externo.BataUpload.Bata_TransactionSoap.ws_download_file_comunicadoAsync(EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest request) {
+            return base.Channel.ws_download_file_comunicadoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoResponse> ws_download_file_comunicadoAsync(EnvioArchivo_Externo.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado) {
+            EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest inValue = new EnvioArchivo_Externo.BataUpload.ws_download_file_comunicadoRequest();
+            inValue.ValidateAcceso = ValidateAcceso;
+            inValue.file = file;
+            inValue.file_name = file_name;
+            inValue.ruta_server_comunicado = ruta_server_comunicado;
+            return ((EnvioArchivo_Externo.BataUpload.Bata_TransactionSoap)(this)).ws_download_file_comunicadoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         EnvioArchivo_Externo.BataUpload.ws_download_fileResponse EnvioArchivo_Externo.BataUpload.Bata_TransactionSoap.ws_download_file(EnvioArchivo_Externo.BataUpload.ws_download_fileRequest request) {
             return base.Channel.ws_download_file(request);
         }
@@ -6511,6 +6676,46 @@ namespace EnvioArchivo_Externo.BataUpload {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> ws_consultar_tiendas_disponibles_cvAsync(string cod_tda) {
             return base.Channel.ws_consultar_tiendas_disponibles_cvAsync(cod_tda);
+        }
+        
+        public System.Data.DataSet ws_consultar_comprobantes(string cod_tda, string tipo, string serie, string numero, string cod_entid) {
+            return base.Channel.ws_consultar_comprobantes(cod_tda, tipo, serie, numero, cod_entid);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ws_consultar_comprobantesAsync(string cod_tda, string tipo, string serie, string numero, string cod_entid) {
+            return base.Channel.ws_consultar_comprobantesAsync(cod_tda, tipo, serie, numero, cod_entid);
+        }
+        
+        public EnvioArchivo_Externo.BataUpload.Ent_Paperless_Return ws_get_FE(string ruc, string login, string password, string tipodoc, string folio, string tipoRetorno) {
+            return base.Channel.ws_get_FE(ruc, login, password, tipodoc, folio, tipoRetorno);
+        }
+        
+        public System.Threading.Tasks.Task<EnvioArchivo_Externo.BataUpload.Ent_Paperless_Return> ws_get_FEAsync(string ruc, string login, string password, string tipodoc, string folio, string tipoRetorno) {
+            return base.Channel.ws_get_FEAsync(ruc, login, password, tipodoc, folio, tipoRetorno);
+        }
+        
+        public System.Data.DataSet ws_consultar_ganador_ruleta_bata(string cod_tda) {
+            return base.Channel.ws_consultar_ganador_ruleta_bata(cod_tda);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ws_consultar_ganador_ruleta_bataAsync(string cod_tda) {
+            return base.Channel.ws_consultar_ganador_ruleta_bataAsync(cod_tda);
+        }
+        
+        public string[] ws_actualizar_cupon_ruleta(string cod_tda, string codigo, string estado, string doc_vta) {
+            return base.Channel.ws_actualizar_cupon_ruleta(cod_tda, codigo, estado, doc_vta);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> ws_actualizar_cupon_ruletaAsync(string cod_tda, string codigo, string estado, string doc_vta) {
+            return base.Channel.ws_actualizar_cupon_ruletaAsync(cod_tda, codigo, estado, doc_vta);
+        }
+        
+        public System.Data.DataSet ws_validar_cupon_ruleta_bata(string cod_tda, string codigo) {
+            return base.Channel.ws_validar_cupon_ruleta_bata(cod_tda, codigo);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ws_validar_cupon_ruleta_bataAsync(string cod_tda, string codigo) {
+            return base.Channel.ws_validar_cupon_ruleta_bataAsync(cod_tda, codigo);
         }
     }
 }

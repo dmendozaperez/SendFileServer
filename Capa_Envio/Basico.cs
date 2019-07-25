@@ -683,9 +683,84 @@ namespace Capa_Envio
 
         }
 
-      
-
         #endregion
 
+        #region<ENVIO DE COMUNICADO DE TIENDA>
+        public static void ejecuta_proceso_comunicado(ref string _error)
+        {
+            BataUpload.ValidateAcceso ws_header_user = null;
+            BataUpload.Bata_TransactionSoapClient ws_get_metodo_ws = null;
+            try
+            {
+                /*credenciales para acceso de la ws pos*/
+                ws_header_user = new BataUpload.ValidateAcceso();
+                ws_header_user.Username = "3D4F4673-98EB-4EB5-A468-4B7FAEC0C721";
+                ws_header_user.Password = "566FDFF1-5311-4FE2-B3FC-0346923FE4B4";
+                /**/
+                /*instancia de la web services*/
+                ws_get_metodo_ws = new BataUpload.Bata_TransactionSoapClient();
+
+                /*captura la ruta desde(origen) de los archivos que se van copiar*/
+                BataUpload.Ent_File_Ruta ws_ruta_origen = ws_get_metodo_ws.ws_get_file_path(ws_header_user, "02");/*este codigo 01 es cuando se van a cargar las fotos*/
+
+                /*validando que no me devuelva vacio*/
+                if (ws_ruta_origen != null)
+                {
+                    /*capturamos la ruta de origen*/
+                    string ruta_origen_comunicado = ws_ruta_origen.file_origen;
+                    string ruta_destino_comunicado = ws_ruta_origen.file_destino;
+                    NetworkShare.ConnectToShare(@ruta_origen_comunicado, "dmendoza", "Bata2013");
+                    if (Directory.Exists(@ruta_origen_comunicado))
+                    {
+                        string[] _carpeta_remoto = Directory.GetDirectories(@ruta_origen_comunicado);
+
+                        for (Int32 i = 0; i < _carpeta_remoto.Length; ++i)
+                        {
+                            //string lastFolderName = System.IO.Path.GetDirectoryName(_carpeta_remoto[i].ToString());
+
+                            var dir_server = new DirectoryInfo(_carpeta_remoto[i].ToString()).Name;
+                            /*SOLO CARPETAS TD*/
+                            if (dir_server.Substring(0,2).ToUpper()=="TD")
+                            {
+                                string ruta_tda_server = ruta_destino_comunicado + "\\50" + dir_server.Substring(2, 3).ToUpper();
+                                string _ruta_textos = _carpeta_remoto[i].ToString().ToString() + "\\TEXTOS\\WEB";
+                                if (Directory.Exists(_ruta_textos))
+                                {
+                                    string[] _COM = Directory.GetFiles(@_ruta_textos, "*.*");
+
+                                    if (_COM.Length > 0)
+                                    {
+                                        for (Int32 a = 0; a < _COM.Length; ++a)
+                                        {
+                                            string _archivo = _COM[a].ToString();
+                                            //string _nombrearchivo_com = Path.GetFileNameWithoutExtension(@_archivo);
+                                            byte[] _archivo_bytes = File.ReadAllBytes(@_archivo);
+                                            string _nombrearchivo_com = Path.GetFileName(@_archivo);
+
+                                            string msg = ws_get_metodo_ws.ws_download_file_comunicado(ws_header_user, _archivo_bytes, _nombrearchivo_com, ruta_tda_server);
+
+                                            if (msg.Length==0)
+                                                File.Delete(@_archivo);                                           
+
+                                        }
+                                    }
+
+                                }
+                            }
+
+                          
+                        }                                                                                 
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                _error = exc.Message;
+            }
+
+        }
+        #endregion
     }
 }

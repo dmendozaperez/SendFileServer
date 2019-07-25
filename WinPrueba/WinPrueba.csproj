@@ -110,6 +110,9 @@
     <None Include="Service References\BataUpload\WinPrueba.BataUpload.Ent_MsgTransac.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataUpload\WinPrueba.BataUpload.Ent_Paperless_Return.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataUpload\WinPrueba.BataUpload.Ent_PathDBF.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -120,6 +123,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataUpload\WinPrueba.BataUpload.ws_download_fileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\WinPrueba.BataUpload.ws_download_file_comunicadoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataUpload\WinPrueba.BataUpload.ws_envia_Scactco_listResponse.datasource">

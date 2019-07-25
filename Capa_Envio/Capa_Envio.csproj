@@ -86,6 +86,9 @@
     <None Include="Service References\BataUpload\Capa_Envio.BataUpload.Ent_MsgTransac.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataUpload\Capa_Envio.BataUpload.Ent_Paperless_Return.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataUpload\Capa_Envio.BataUpload.Ent_PathDBF.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -96,6 +99,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataUpload\Capa_Envio.BataUpload.ws_download_fileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataUpload\Capa_Envio.BataUpload.ws_download_file_comunicadoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataUpload\Capa_Envio.BataUpload.ws_envia_Scactco_listResponse.datasource">
