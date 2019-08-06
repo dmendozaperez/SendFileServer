@@ -162,6 +162,9 @@
     <None Include="Service References\BataWS\Capa_Envio.BataWS.Fvdespc.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataWS\Capa_Envio.BataWS.Impresion_QR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataWS\Capa_Envio.BataWS.Paq_Get.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -219,6 +222,9 @@
     <None Include="Service References\BataWS\Capa_Envio.BataWS.ws_existe_genera_hash_versionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BataWS\Capa_Envio.BataWS.ws_existe_genera_version_paperlessResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BataWS\Capa_Envio.BataWS.ws_existe_serviciowin_versionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -262,6 +268,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\Capa_Envio.BataWS.ws_tdaupdate_wsurl_winResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BataWS\Capa_Envio.BataWS.ws_tienda_impresion_qrResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BataWS\Capa_Envio.BataWS.ws_tienda_invResponse.datasource">

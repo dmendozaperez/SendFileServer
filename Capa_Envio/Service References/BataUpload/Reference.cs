@@ -3655,6 +3655,108 @@ namespace Capa_Envio.BataUpload {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
+    public partial class Ent_Comunicado : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string file_cod_tdaField;
+        
+        private string file_nombreField;
+        
+        private string file_descripcionField;
+        
+        private string file_fecha_hora_creField;
+        
+        private string file_fecha_hora_modField;
+        
+        private string file_user_novField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string file_cod_tda {
+            get {
+                return this.file_cod_tdaField;
+            }
+            set {
+                this.file_cod_tdaField = value;
+                this.RaisePropertyChanged("file_cod_tda");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string file_nombre {
+            get {
+                return this.file_nombreField;
+            }
+            set {
+                this.file_nombreField = value;
+                this.RaisePropertyChanged("file_nombre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string file_descripcion {
+            get {
+                return this.file_descripcionField;
+            }
+            set {
+                this.file_descripcionField = value;
+                this.RaisePropertyChanged("file_descripcion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string file_fecha_hora_cre {
+            get {
+                return this.file_fecha_hora_creField;
+            }
+            set {
+                this.file_fecha_hora_creField = value;
+                this.RaisePropertyChanged("file_fecha_hora_cre");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string file_fecha_hora_mod {
+            get {
+                return this.file_fecha_hora_modField;
+            }
+            set {
+                this.file_fecha_hora_modField = value;
+                this.RaisePropertyChanged("file_fecha_hora_mod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string file_user_nov {
+            get {
+                return this.file_user_novField;
+            }
+            set {
+                this.file_user_novField = value;
+                this.RaisePropertyChanged("file_user_nov");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://bataperu.com.pe/")]
     public partial class Ent_File_Ruta : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string file_origenField;
@@ -5482,14 +5584,18 @@ namespace Capa_Envio.BataUpload {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=2)]
         public string ruta_server_comunicado;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://bataperu.com.pe/", Order=3)]
+        public Capa_Envio.BataUpload.Ent_Comunicado obj_com;
+        
         public ws_download_file_comunicadoRequest() {
         }
         
-        public ws_download_file_comunicadoRequest(Capa_Envio.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado) {
+        public ws_download_file_comunicadoRequest(Capa_Envio.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado, Capa_Envio.BataUpload.Ent_Comunicado obj_com) {
             this.ValidateAcceso = ValidateAcceso;
             this.file = file;
             this.file_name = file_name;
             this.ruta_server_comunicado = ruta_server_comunicado;
+            this.obj_com = obj_com;
         }
     }
     
@@ -6276,12 +6382,13 @@ namespace Capa_Envio.BataUpload {
             return base.Channel.ws_download_file_comunicado(request);
         }
         
-        public string ws_download_file_comunicado(Capa_Envio.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado) {
+        public string ws_download_file_comunicado(Capa_Envio.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado, Capa_Envio.BataUpload.Ent_Comunicado obj_com) {
             Capa_Envio.BataUpload.ws_download_file_comunicadoRequest inValue = new Capa_Envio.BataUpload.ws_download_file_comunicadoRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.file = file;
             inValue.file_name = file_name;
             inValue.ruta_server_comunicado = ruta_server_comunicado;
+            inValue.obj_com = obj_com;
             Capa_Envio.BataUpload.ws_download_file_comunicadoResponse retVal = ((Capa_Envio.BataUpload.Bata_TransactionSoap)(this)).ws_download_file_comunicado(inValue);
             return retVal.ws_download_file_comunicadoResult;
         }
@@ -6291,12 +6398,13 @@ namespace Capa_Envio.BataUpload {
             return base.Channel.ws_download_file_comunicadoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Capa_Envio.BataUpload.ws_download_file_comunicadoResponse> ws_download_file_comunicadoAsync(Capa_Envio.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado) {
+        public System.Threading.Tasks.Task<Capa_Envio.BataUpload.ws_download_file_comunicadoResponse> ws_download_file_comunicadoAsync(Capa_Envio.BataUpload.ValidateAcceso ValidateAcceso, byte[] file, string file_name, string ruta_server_comunicado, Capa_Envio.BataUpload.Ent_Comunicado obj_com) {
             Capa_Envio.BataUpload.ws_download_file_comunicadoRequest inValue = new Capa_Envio.BataUpload.ws_download_file_comunicadoRequest();
             inValue.ValidateAcceso = ValidateAcceso;
             inValue.file = file;
             inValue.file_name = file_name;
             inValue.ruta_server_comunicado = ruta_server_comunicado;
+            inValue.obj_com = obj_com;
             return ((Capa_Envio.BataUpload.Bata_TransactionSoap)(this)).ws_download_file_comunicadoAsync(inValue);
         }
         

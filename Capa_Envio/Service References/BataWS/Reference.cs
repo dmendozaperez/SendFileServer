@@ -224,6 +224,14 @@ namespace Capa_Envio.BataWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ws_existe_genera_hash_version", ReplyAction="*")]
         System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_existe_genera_hash_versionResponse> ws_existe_genera_hash_versionAsync(Capa_Envio.BataWS.ws_existe_genera_hash_versionRequest request);
         
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_existe_genera_version_paperlessRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ws_existe_genera_version_paperless", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Capa_Envio.BataWS.ws_existe_genera_version_paperlessResponse ws_existe_genera_version_paperless(Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ws_existe_genera_version_paperless", ReplyAction="*")]
+        System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_existe_genera_version_paperlessResponse> ws_existe_genera_version_paperlessAsync(Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest request);
+        
         // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_existe_serviciowin_versionRequest tiene encabezados.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ws_existe_serviciowin_version", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -397,6 +405,14 @@ namespace Capa_Envio.BataWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ws_delete_paq_ws", ReplyAction="*")]
         System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_delete_paq_wsResponse> ws_delete_paq_wsAsync(Capa_Envio.BataWS.ws_delete_paq_wsRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el mensaje ws_tienda_impresion_qrRequest tiene encabezados.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ws_tienda_impresion_qr", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Capa_Envio.BataWS.ws_tienda_impresion_qrResponse ws_tienda_impresion_qr(Capa_Envio.BataWS.ws_tienda_impresion_qrRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ws_tienda_impresion_qr", ReplyAction="*")]
+        System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_tienda_impresion_qrResponse> ws_tienda_impresion_qrAsync(Capa_Envio.BataWS.ws_tienda_impresion_qrRequest request);
     }
     
     /// <remarks/>
@@ -446,6 +462,66 @@ namespace Capa_Envio.BataWS {
             set {
                 this.anyAttrField = value;
                 this.RaisePropertyChanged("AnyAttr");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Impresion_QR : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string cod_tdaField;
+        
+        private string imp_qrField;
+        
+        private string err_qrField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string cod_tda {
+            get {
+                return this.cod_tdaField;
+            }
+            set {
+                this.cod_tdaField = value;
+                this.RaisePropertyChanged("cod_tda");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string imp_qr {
+            get {
+                return this.imp_qrField;
+            }
+            set {
+                this.imp_qrField = value;
+                this.RaisePropertyChanged("imp_qr");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string err_qr {
+            get {
+                return this.err_qrField;
+            }
+            set {
+                this.err_qrField = value;
+                this.RaisePropertyChanged("err_qr");
             }
         }
         
@@ -2290,6 +2366,44 @@ namespace Capa_Envio.BataWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_existe_genera_version_paperless", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ws_existe_genera_version_paperlessRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public Capa_Envio.BataWS.Autenticacion Autenticacion;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string _version;
+        
+        public ws_existe_genera_version_paperlessRequest() {
+        }
+        
+        public ws_existe_genera_version_paperlessRequest(Capa_Envio.BataWS.Autenticacion Autenticacion, string _version) {
+            this.Autenticacion = Autenticacion;
+            this._version = _version;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_existe_genera_version_paperlessResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ws_existe_genera_version_paperlessResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public bool ws_existe_genera_version_paperlessResult;
+        
+        public ws_existe_genera_version_paperlessResponse() {
+        }
+        
+        public ws_existe_genera_version_paperlessResponse(bool ws_existe_genera_version_paperlessResult) {
+            this.ws_existe_genera_version_paperlessResult = ws_existe_genera_version_paperlessResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ws_existe_serviciowin_version", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
     public partial class ws_existe_serviciowin_versionRequest {
         
@@ -3067,6 +3181,44 @@ namespace Capa_Envio.BataWS {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_tienda_impresion_qr", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ws_tienda_impresion_qrRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public Capa_Envio.BataWS.Autenticacion Autenticacion;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string _cod_tda;
+        
+        public ws_tienda_impresion_qrRequest() {
+        }
+        
+        public ws_tienda_impresion_qrRequest(Capa_Envio.BataWS.Autenticacion Autenticacion, string _cod_tda) {
+            this.Autenticacion = Autenticacion;
+            this._cod_tda = _cod_tda;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ws_tienda_impresion_qrResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ws_tienda_impresion_qrResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public Capa_Envio.BataWS.Impresion_QR ws_tienda_impresion_qrResult;
+        
+        public ws_tienda_impresion_qrResponse() {
+        }
+        
+        public ws_tienda_impresion_qrResponse(Capa_Envio.BataWS.Impresion_QR ws_tienda_impresion_qrResult) {
+            this.ws_tienda_impresion_qrResult = ws_tienda_impresion_qrResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface bata_transaccionSoapChannel : Capa_Envio.BataWS.bata_transaccionSoap, System.ServiceModel.IClientChannel {
     }
@@ -3793,6 +3945,31 @@ namespace Capa_Envio.BataWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Capa_Envio.BataWS.ws_existe_genera_version_paperlessResponse Capa_Envio.BataWS.bata_transaccionSoap.ws_existe_genera_version_paperless(Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest request) {
+            return base.Channel.ws_existe_genera_version_paperless(request);
+        }
+        
+        public bool ws_existe_genera_version_paperless(Capa_Envio.BataWS.Autenticacion Autenticacion, string _version) {
+            Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest inValue = new Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest();
+            inValue.Autenticacion = Autenticacion;
+            inValue._version = _version;
+            Capa_Envio.BataWS.ws_existe_genera_version_paperlessResponse retVal = ((Capa_Envio.BataWS.bata_transaccionSoap)(this)).ws_existe_genera_version_paperless(inValue);
+            return retVal.ws_existe_genera_version_paperlessResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_existe_genera_version_paperlessResponse> Capa_Envio.BataWS.bata_transaccionSoap.ws_existe_genera_version_paperlessAsync(Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest request) {
+            return base.Channel.ws_existe_genera_version_paperlessAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_existe_genera_version_paperlessResponse> ws_existe_genera_version_paperlessAsync(Capa_Envio.BataWS.Autenticacion Autenticacion, string _version) {
+            Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest inValue = new Capa_Envio.BataWS.ws_existe_genera_version_paperlessRequest();
+            inValue.Autenticacion = Autenticacion;
+            inValue._version = _version;
+            return ((Capa_Envio.BataWS.bata_transaccionSoap)(this)).ws_existe_genera_version_paperlessAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Capa_Envio.BataWS.ws_existe_serviciowin_versionResponse Capa_Envio.BataWS.bata_transaccionSoap.ws_existe_serviciowin_version(Capa_Envio.BataWS.ws_existe_serviciowin_versionRequest request) {
             return base.Channel.ws_existe_serviciowin_version(request);
         }
@@ -4317,6 +4494,31 @@ namespace Capa_Envio.BataWS {
             inValue.Autenticacion = Autenticacion;
             inValue.ruta_delete = ruta_delete;
             return ((Capa_Envio.BataWS.bata_transaccionSoap)(this)).ws_delete_paq_wsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Capa_Envio.BataWS.ws_tienda_impresion_qrResponse Capa_Envio.BataWS.bata_transaccionSoap.ws_tienda_impresion_qr(Capa_Envio.BataWS.ws_tienda_impresion_qrRequest request) {
+            return base.Channel.ws_tienda_impresion_qr(request);
+        }
+        
+        public Capa_Envio.BataWS.Impresion_QR ws_tienda_impresion_qr(Capa_Envio.BataWS.Autenticacion Autenticacion, string _cod_tda) {
+            Capa_Envio.BataWS.ws_tienda_impresion_qrRequest inValue = new Capa_Envio.BataWS.ws_tienda_impresion_qrRequest();
+            inValue.Autenticacion = Autenticacion;
+            inValue._cod_tda = _cod_tda;
+            Capa_Envio.BataWS.ws_tienda_impresion_qrResponse retVal = ((Capa_Envio.BataWS.bata_transaccionSoap)(this)).ws_tienda_impresion_qr(inValue);
+            return retVal.ws_tienda_impresion_qrResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_tienda_impresion_qrResponse> Capa_Envio.BataWS.bata_transaccionSoap.ws_tienda_impresion_qrAsync(Capa_Envio.BataWS.ws_tienda_impresion_qrRequest request) {
+            return base.Channel.ws_tienda_impresion_qrAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Capa_Envio.BataWS.ws_tienda_impresion_qrResponse> ws_tienda_impresion_qrAsync(Capa_Envio.BataWS.Autenticacion Autenticacion, string _cod_tda) {
+            Capa_Envio.BataWS.ws_tienda_impresion_qrRequest inValue = new Capa_Envio.BataWS.ws_tienda_impresion_qrRequest();
+            inValue.Autenticacion = Autenticacion;
+            inValue._cod_tda = _cod_tda;
+            return ((Capa_Envio.BataWS.bata_transaccionSoap)(this)).ws_tienda_impresion_qrAsync(inValue);
         }
     }
 }

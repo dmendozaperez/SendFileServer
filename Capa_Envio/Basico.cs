@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -686,6 +687,106 @@ namespace Capa_Envio
         #endregion
 
         #region<ENVIO DE COMUNICADO DE TIENDA>
+        private static string _conexion_fvdes_oledb(string _path)
+        {
+            return "Provider=VFPOLEDB;Data Source=" + _path + ";Exclusive=No";
+            //return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + _path_default + ";Extended Properties=dBASE IV;";
+        }
+        private static BataUpload.Ent_Comunicado get_obj_com(string _path, string tienda,string texto)
+        {
+            BataUpload.Ent_Comunicado obj = null;
+            try
+            {
+                string sqlquery = "SELECT * FROM FOLDER01  WHERE TIENDA='" + tienda + "' AND UPPER(TEXTO2)='" + texto +"'";
+                using (OleDbConnection cn = new OleDbConnection(_conexion_fvdes_oledb(_path)))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (OleDbCommand cmd = new OleDbCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.Text;
+                            OleDbDataReader dr = cmd.ExecuteReader();
+                            if (dr.HasRows)
+                            {
+                                obj = new BataUpload.Ent_Comunicado();
+                                while(dr.Read())
+                                {
+                                    obj.file_cod_tda = dr["tienda"].ToString();
+                                    obj.file_nombre = dr["texto2"].ToString();
+                                    obj.file_descripcion = dr["detalle"].ToString();
+                                    obj.file_user_nov = dr["f_user"].ToString();                                    
+                                }
+                            }
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {                        
+                        if (cn != null)
+                            if (cn.State == ConnectionState.Open) cn.Close();
+                        obj = null;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                obj = null;
+            }
+            return obj;
+        }
+        private static string del_obj_com(string _path, string tienda, string texto)
+        {
+            string error ="";
+            try
+            {
+                string sqlquery = "DELETE FROM FOLDER01  WHERE TIENDA='" + tienda + "' AND UPPER(TEXTO2)='" + texto + "'";
+                using (OleDbConnection cn = new OleDbConnection(_conexion_fvdes_oledb(_path)))
+                {
+                    try
+                    {
+                        if (cn.State == 0) cn.Open();
+                        using (OleDbCommand cmd = new OleDbCommand(sqlquery, cn))
+                        {
+                            cmd.CommandTimeout = 0;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.ExecuteNonQuery();    
+                        }
+
+                    }
+                    catch (Exception exc)
+                    {
+                        if (cn != null)
+                            if (cn.State == ConnectionState.Open) cn.Close();
+                        error = exc.Message;
+                    }
+                    if (cn != null)
+                        if (cn.State == ConnectionState.Open) cn.Close();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+            }
+            return error;
+        }
+        private static void _espera_ejecuta(Int32 _segundos)
+        {
+            try
+            {
+                _segundos = _segundos * 1000;
+                System.Threading.Thread.Sleep(_segundos);
+            }
+            catch
+            {
+
+            }
+        }
         public static void ejecuta_proceso_comunicado(ref string _error)
         {
             BataUpload.ValidateAcceso ws_header_user = null;
@@ -699,6 +800,7 @@ namespace Capa_Envio
                 /**/
                 /*instancia de la web services*/
                 ws_get_metodo_ws = new BataUpload.Bata_TransactionSoapClient();
+                
 
                 /*captura la ruta desde(origen) de los archivos que se van copiar*/
                 BataUpload.Ent_File_Ruta ws_ruta_origen = ws_get_metodo_ws.ws_get_file_path(ws_header_user, "02");/*este codigo 01 es cuando se van a cargar las fotos*/
@@ -724,6 +826,13 @@ namespace Capa_Envio
                             {
                                 string ruta_tda_server = ruta_destino_comunicado + "\\50" + dir_server.Substring(2, 3).ToUpper();
                                 string _ruta_textos = _carpeta_remoto[i].ToString().ToString() + "\\TEXTOS\\WEB";
+
+                                string cod_tienda= "50" + dir_server.Substring(2, 3).ToUpper();
+
+                                string _ruta_textos_dbf = _carpeta_remoto[i].ToString().ToString() + "\\TEXTOS\\DBF";
+
+                                string _file_ruta_textos_dbf= _carpeta_remoto[i].ToString().ToString() + "\\TEXTOS\\DBF\\FOLDER01.DBF";
+
                                 if (Directory.Exists(_ruta_textos))
                                 {
                                     string[] _COM = Directory.GetFiles(@_ruta_textos, "*.*");
@@ -735,12 +844,80 @@ namespace Capa_Envio
                                             string _archivo = _COM[a].ToString();
                                             //string _nombrearchivo_com = Path.GetFileNameWithoutExtension(@_archivo);
                                             byte[] _archivo_bytes = File.ReadAllBytes(@_archivo);
-                                            string _nombrearchivo_com = Path.GetFileName(@_archivo);
+                                            string _nombrearchivo_com = Path.GetFileName(@_archivo).ToUpper();                                            
 
-                                            string msg = ws_get_metodo_ws.ws_download_file_comunicado(ws_header_user, _archivo_bytes, _nombrearchivo_com, ruta_tda_server);
 
-                                            if (msg.Length==0)
-                                                File.Delete(@_archivo);                                           
+                                            if (_archivo_bytes!=null)
+                                            {
+                                                FileInfo inf = new FileInfo(@_archivo);
+                                                string file_fec_cre = String.Format("{0:dd/MM/yyyy HH:mm:ss}", inf.CreationTime);
+                                                string file_fec_mod = String.Format("{0:dd/MM/yyyy HH:mm:ss}", inf.LastWriteTime);
+
+                                                /*validamos si existe el archivo pq de no existir el objeto es null*/
+
+                                                int c_rpta = 0;
+                                                bool procesado = false;
+                                                int max_intentos = 40;
+                                                int sleep = 5;
+                                                Boolean existe_dbf = false;
+                                                while (procesado == false && c_rpta <= max_intentos)
+                                                {
+                                                    existe_dbf = File.Exists(_file_ruta_textos_dbf);
+                                                    if (existe_dbf)
+                                                    {
+                                                        procesado = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        procesado = false;
+                                                        c_rpta++;
+                                                        _espera_ejecuta(sleep);
+                                                    }
+                                                }
+
+                                                BataUpload.Ent_Comunicado obj = null;
+
+                                                c_rpta = 0;
+                                                procesado = false;
+                                                max_intentos = 40;
+                                                sleep = 5;
+                                                while (procesado == false && c_rpta <= max_intentos)
+                                                {
+                                                    obj = (existe_dbf) ? get_obj_com(_ruta_textos_dbf, cod_tienda, _nombrearchivo_com) : null;
+                                                    if (obj!=null)
+                                                    {
+                                                        procesado = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        procesado = false;
+                                                        c_rpta++;
+                                                        _espera_ejecuta(sleep);
+                                                    }
+                                                }
+
+
+                                                
+
+                                                if (obj!=null)
+                                                {
+                                                    obj.file_fecha_hora_cre = file_fec_cre;
+                                                    obj.file_fecha_hora_mod = file_fec_mod;
+                                                }
+
+                                                string msg = ws_get_metodo_ws.ws_download_file_comunicado(ws_header_user, _archivo_bytes, _nombrearchivo_com, ruta_tda_server,obj);
+
+                                                if (msg.Length == 0)
+                                                {
+                                                    /*si no hay errores entonces delete a la tabla el registro y borramos el archivo*/
+                                                    string error = (obj==null)?"": del_obj_com(_ruta_textos_dbf, cod_tienda, _nombrearchivo_com);
+                                                    if (error.Length==0)
+                                                        File.Delete(@_archivo);
+                                                }
+                                                    
+                                            }
+
+                                            
 
                                         }
                                     }
