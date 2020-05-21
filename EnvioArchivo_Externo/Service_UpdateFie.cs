@@ -203,7 +203,7 @@ namespace EnvioArchivo_Externo
         {
             tmservicio_xml.Start();
             tmservicio_update.Start();
-            tmservicio_fotos.Start();
+           // tmservicio_fotos.Start();
             tmservicio_com.Start();
         }
 
@@ -211,7 +211,7 @@ namespace EnvioArchivo_Externo
         {
             tmservicio_xml.Stop();
             tmservicio_update.Stop();
-            tmservicio_fotos.Stop();
+           // tmservicio_fotos.Stop();
             tmservicio_com.Stop();
         }
     }
